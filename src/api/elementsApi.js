@@ -1,7 +1,7 @@
 import axios from "axios";
 // require('dotenv').config()
 
-const API = axios.create({ baseURL: `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_BASE_PORT}` });
+const API = axios.create({ baseURL: `${process.env.REACT_APP_BACKEND_LIVE_API}` });
 
 export const updateFloor = async (id, length, width, material) => {
     try {

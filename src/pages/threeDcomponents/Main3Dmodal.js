@@ -17,7 +17,6 @@ const Main3Dmodal = () => {
 
     const floorRef = useRef();
     const wallRef = [useRef(), useRef(), useRef(), useRef()];
-
     const lightRef = useRef();
     const spotlightLight1Ref = useRef();
     const spotlightLight2Ref = useRef();
