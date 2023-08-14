@@ -1,7 +1,8 @@
 import axios from "axios";
 // require('dotenv').config()
 
-const API = axios.create({ baseURL: `${process.env.REACT_APP_BACKEND_LIVE_API}` });
+const API = axios.create({ baseURL: "https://threedroomdesignerfordemo.online" });
+// const API = axios.create({ baseURL: "http://localhost:8000" });
 
 export const getProjectList = async () => {
     try {
