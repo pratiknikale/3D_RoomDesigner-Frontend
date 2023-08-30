@@ -63,6 +63,10 @@ export const projectSlice = createSlice({
                 case "color":
                     state.currentProjectDetails.elements.Wall[payload.index].color = payload.value;
                     break;
+                case "newWallElement":
+                    state.currentProjectDetails.elements.Wall[payload.index].subElements.push(payload.value);
+                    // return { ...state, currentProjectDetails: { ...state.currentProjectDetails, elements: { ...state.currentProjectDetails.elements, Wall: [...state.currentProjectDetails.elements.Wall, [payload.index]: {}] } } }
+                    break;
             }
         }
     }

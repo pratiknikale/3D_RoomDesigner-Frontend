@@ -7,6 +7,12 @@ import { ColorPicker } from '@wellbees/color-picker-input'
 import TextureDropdown from "../components/textuiring/textureDropdown";
 
 import wallTextureDetails from "../../../assets/textures/wallTextureList";
+import WallsSubElements from "../components/wallSubElements/WallSubElements";
+
+
+
+import { Accordion, AccordionSummary, AccordionDetails, Typography } from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 
@@ -39,11 +45,13 @@ const Walls = () => {
 
     }
 
-    const updateWallDetailsState = (name, value, i) => {
-        // e.preventDefault();
-        // console.log("updateWallDetailsState:::: ", e.target.value)
-        // let name = e.target.name;
-        // let value = name === "visible" ? e.target.checked : e.target.value;
+    const updateWallDetailsState = (name, value, i, e) => {
+        if (e) {
+            // e.preventDefault();
+            e.stopPropagation()
+
+        }
+
         let index = (i ? i : 0);
         dispatch(updateWallDetails({ name: name, value: value, index: index }));
     }
@@ -89,35 +97,50 @@ const Walls = () => {
                 }
                 {currentProjectDetails?.elements?.Wall && (currentProjectDetails?.elements?.Wall.length > 0) && currentProjectDetails?.elements.Wall.map((Wall, i) => {
                     return <>
-                        {/* specific attribute of each wall */}
-                        <Grid item xs={12} sm={12} style={{ padding: "5px", }}>
-                            <p style={{ margin: "0px", marginBottom: "10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                                <span><b>Wall {i + 1}</b></ span>
-                                <span>
-                                    <FormGroup>
-                                        <FormControlLabel control={<Checkbox checked={Wall.visible} value={Wall.visible} name="visible" onChange={(e) => updateWallDetailsState(e.target.name, e.target.checked, i)} />} label="Show" />
-                                    </FormGroup>
-                                </span>
-                            </p>
-                            <Grid item xs={12} style={{ padding: "10px" }}>
-                                <ColorPicker
-                                    size="small"
-                                    name="color"
-                                    label="Wall Color"
-                                    disabled={false}
-                                    value={Wall.color}
-                                    inputType="mui"
-                                    fullWidth={true}
-                                    onChange={(color) => updateWallDetailsState("color", color, i)}
-                                />
-                                <FormControl style={{ marginTop: "20px" }} fullWidth>
-                                    <InputLabel id="demo-simple-select-label" >Wallpaper</InputLabel>
-                                    <TextureDropdown name={"wallMaterial"} label={"Wallpaper"} textureList={wallTextureDetails} materialValue={currentProjectDetails?.elements?.Wall[i]?.material} index={i} textureChangeHandler={updateWallDetailsState} />
-                                </FormControl>
-                            </Grid>
+                        <Grid item xs={12} sm={12} style={{ padding: "5px", marginBottom: "8px", backgroundColor: "#e2e2e1" }}>
+
+                            <Accordion>
+                                <AccordionSummary
+                                    style={{ backgroundColor: "rgba(0,0,0,0.2)" }}
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel2a-content"
+                                    id="panel2a-header"
+                                >
+                                    <Typography style={{ display: "flex", alignItems: "center", width: "100%", justifyContent: "space-between" }}>
+                                        <span><b>Wall {i + 1}</b></ span>
+                                        <span>
+                                            <FormGroup>
+                                                <FormControlLabel control={<Checkbox checked={Wall.visible} value={Wall.visible} name="visible" onChange={(e) => updateWallDetailsState(e.target.name, e.target.checked, i, e)} />} label="Show" />
+                                            </FormGroup>
+                                        </span>
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Typography>
+                                        <Grid item xs={12} style={{ padding: "10px" }}>
+                                            <ColorPicker
+                                                size="small"
+                                                name="color"
+                                                label="Wall Color"
+                                                disabled={false}
+                                                value={Wall.color}
+                                                inputType="mui"
+                                                fullWidth={true}
+                                                onChange={(color) => updateWallDetailsState("color", color, i)}
+                                            />
+                                            <FormControl style={{ marginTop: "20px" }} fullWidth>
+                                                <InputLabel id="demo-simple-select-label" >Wallpaper</InputLabel>
+                                                <TextureDropdown name={"wallMaterial"} label={"Wallpaper"} textureList={wallTextureDetails} materialValue={currentProjectDetails?.elements?.Wall[i]?.material} index={i} textureChangeHandler={updateWallDetailsState} />
+                                            </FormControl>
+                                        </Grid>
+                                        <WallsSubElements wallIndex={i} />
+                                    </Typography>
+                                </AccordionDetails>
+                            </Accordion>
                         </Grid>
                     </>
                 })}
+
 
                 <Grid item xs={12} sm={12} style={{ padding: "10px", display: "flex", justifyContent: "center" }}>
                     {/* create new wall if not exists (max wall=4) */}
