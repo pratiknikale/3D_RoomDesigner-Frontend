@@ -1,4 +1,4 @@
-# 3dRoomDesigner - pratik
+# 3d_RoomDesigner - pratik
 
 ### Project Description
 This is a project where a user can create a 3d representation of his house/room by trying different flooring, wallpaper, lightings, furniture, position of furniture, windows, doors, etc. The room can be designed in every way possible. 
