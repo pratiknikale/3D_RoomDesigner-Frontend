@@ -50,8 +50,7 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
   }, []);
 
   const google = () => {
-    window.open("https://threedroomdesignerfordemo.online/userAuth/google/callback", "_self");
-    // window.open("http://localhost:8000/userAuth/google/callback", "_self");
+    window.open(`${process.env.REACT_APP_BACKEND_BASE_URL}/userAuth/google/callback`, "_self");
   };
 
   // useEffect(() => {
