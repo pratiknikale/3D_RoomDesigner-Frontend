@@ -68,7 +68,29 @@ export const projectSlice = createSlice({
                     // return { ...state, currentProjectDetails: { ...state.currentProjectDetails, elements: { ...state.currentProjectDetails.elements, Wall: [...state.currentProjectDetails.elements.Wall, [payload.index]: {}] } } }
                     break;
             }
-        }
+        },
+        updateWallElement: ((state, { payload }) => {
+            switch (payload.name) {
+                case "height":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].height = payload.value;
+                    break;
+                case "length":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].length = payload.value;
+                    break;
+                case "width":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].width = payload.value;
+                    break;
+                case "positionX":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].positionX = payload.value;
+                    break;
+                case "positionY":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].positionY = payload.value;
+                    break;
+                case "positionZ":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].positionZ = payload.value;
+                    break;
+            }
+        })
     }
 });
 
@@ -79,7 +101,8 @@ export const {
     setCurrentProjectDetails,
     updateFloorDetails,
     createWall,
-    updateWallDetails
+    updateWallDetails,
+    updateWallElement
 } = projectSlice.actions;
 
 export default projectSlice.reducer;

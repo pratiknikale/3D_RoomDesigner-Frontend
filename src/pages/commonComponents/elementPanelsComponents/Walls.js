@@ -97,7 +97,7 @@ const Walls = () => {
                 }
                 {currentProjectDetails?.elements?.Wall && (currentProjectDetails?.elements?.Wall.length > 0) && currentProjectDetails?.elements.Wall.map((Wall, i) => {
                     return <>
-                        <Grid item xs={12} sm={12} style={{ padding: "5px", marginBottom: "8px", backgroundColor: "#e2e2e1" }}>
+                        <Grid item xs={12} sm={12} style={{ padding: "2px", marginBottom: "8px", backgroundColor: "#e2e2e1" }}>
 
                             <Accordion>
                                 <AccordionSummary
@@ -115,9 +115,9 @@ const Walls = () => {
                                         </span>
                                     </Typography>
                                 </AccordionSummary>
-                                <AccordionDetails>
+                                <AccordionDetails style={{ padding: "5px" }}>
                                     <Typography>
-                                        <Grid item xs={12} style={{ padding: "10px" }}>
+                                        <Grid item xs={12} style={{ paddingTop: "8px", paddingBottom: "8px" }}>
                                             <ColorPicker
                                                 size="small"
                                                 name="color"
