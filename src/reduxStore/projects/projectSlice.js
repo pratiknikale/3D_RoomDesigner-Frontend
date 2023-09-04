@@ -89,6 +89,10 @@ export const projectSlice = createSlice({
                 case "positionZ":
                     state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].positionZ = payload.value;
                     break;
+                case "delete":
+                    console.log(payload);
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements.splice(payload.subElementIndex, 1);
+                    break;
             }
         })
     }

@@ -40,6 +40,10 @@ const WallsSubElements = ({ wallIndex }) => {
         dispatch(updateWallElement({ name: name, value: value, index: index, wallIndex: wallIndex }))
     }
 
+    const deleteSubElement = (e, wallIndex, subElementIndex) => {
+        dispatch(updateWallElement({ name: "delete", wallIndex: wallIndex, subElementIndex: subElementIndex }))
+    }
+
     return (
         <>
             <Grid item xs={12} sm={12} style={{ padding: "5px", marginBottom: "5px", backgroundColor: "#e2e2e1" }}>
@@ -180,7 +184,7 @@ const WallsSubElements = ({ wallIndex }) => {
                                                     <Grid item xs={1.6} style={{ padding: "0px", display: "flex", justifyContent: "center", alignItems: "center" }}><span>Feet</span></Grid>
                                                 </Grid>
                                                 <Button
-                                                    // onClick={(e) => createSubElement(e)}
+                                                    onClick={(e) => deleteSubElement(e, wallIndex, i)}
                                                     variant="contained"
                                                     color="secondary"
                                                     sx={{
