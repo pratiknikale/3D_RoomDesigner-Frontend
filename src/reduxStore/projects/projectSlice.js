@@ -40,9 +40,9 @@ export const projectSlice = createSlice({
 
         },
         createWall: (state, { payload }) => {
-            // state.currentProjectDetails.elements[payload.name].push(payload.value);
+            state.currentProjectDetails.elements[`${payload.name}`].push(payload.value);
             // return { ...state.currentProjectDetails.elements, Wall: [payload, ...state.currentProjectDetails.elements.Wall] }
-            return { ...state, currentProjectDetails: { ...state.currentProjectDetails, elements: { ...state.currentProjectDetails.elements, Wall: [payload.value, ...state.currentProjectDetails.elements.Wall] } } }
+            // return { ...state, currentProjectDetails: { ...state.currentProjectDetails, elements: { ...state.currentProjectDetails.elements, Wall: [payload.value, ...state.currentProjectDetails.elements.Wall] } } }
         },
         updateWallDetails: (state, { payload }) => {
             switch (payload.name) {

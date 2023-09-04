@@ -84,19 +84,19 @@ const Main3Dmodal = () => {
             {/* walls */}
             {/* walls */}
             {/* walls */}
-            {elements?.Wall?.length > 0 && elements?.Wall.map((wall, i) => {
+            {elements?.Wall?.length > 0 && elements?.Wall.map((wall, WI) => {
                 return <>
                     <mesh visible={wall.visible}
                         position={
-                            i == 0
+                            WI == 0
                                 ?
                                 [0, feetToThreeD(wall.height / 2), -feetToThreeD((elements?.Floor?.width / 2) + (wall.width / 2))]
                                 :
-                                i == 1
+                                WI == 1
                                     ?
                                     [feetToThreeD((elements?.Floor?.length / 2) + (wall.width / 2)), feetToThreeD(wall.height / 2), 0]
                                     :
-                                    i == 2
+                                    WI == 2
                                         ?
                                         [0, feetToThreeD(wall.height / 2), feetToThreeD((elements?.Floor?.width / 2) + (wall.width / 2))]
                                         :
@@ -107,17 +107,35 @@ const Main3Dmodal = () => {
                         {/* [0,height,0] */}
                         <boxGeometry attach="geometry"
                             args={
-                                i == 0 || i == 2 ?
+                                WI == 0 || WI == 2 ?
                                     [feetToThreeD((elements?.Floor?.length) ? (elements?.Floor?.length) : 0), feetToThreeD(wall.height), feetToThreeD(wall.width)]
                                     :
                                     [feetToThreeD(wall.width), feetToThreeD(wall.height), feetToThreeD((elements?.Floor?.width) ? (elements?.Floor?.width) : 0)]
                             } />
-                        <meshStandardMaterial ref={wallRef[i]} map={elements?.Wall[i]?.material === "None" ? "" : wallpaperTexture[i]} attach="material" color={elements?.Wall[i]?.material === "None" || elements?.Wall[i]?.material === "" ? wall.color : "white"} />
-                        {wall.subElements.length > 0 && wall.subElements.map((subElement, i) => {
+                        <meshStandardMaterial ref={wallRef[WI]} map={elements?.Wall[WI]?.material === "None" || elements?.Wall[WI]?.material === "" ? "" : wallpaperTexture[WI]} attach="material" color={elements?.Wall[WI]?.material === "None" || elements?.Wall[WI]?.material === "" ? wall.color : "white"} />
+                        {wall.subElements.length > 0 && wall.subElements.map((subElement, SEI) => {
                             return <>
-                                {/* <mesh position={[-((feetToThreeD(elements?.Floor?.length) / 2) - (feetToThreeD(2.6) / 2)), -((feetToThreeD(wall.height) / 2) - (feetToThreeD(6.5) / 2)), 0]}> */}
-                                <mesh position={[-(((feetToThreeD(elements?.Floor?.length) / 2) - (feetToThreeD(subElement.width) / 2)) - (feetToThreeD(subElement.positionX))), -((feetToThreeD(wall.height) / 2) - (feetToThreeD(subElement.height) / 2)), 0]}>
-                                    <boxGeometry args={[feetToThreeD(subElement.width), feetToThreeD(subElement.height), feetToThreeD(0.55)]} />
+                                <mesh position={
+                                    WI === 0
+                                        ?
+                                        [-(((feetToThreeD(elements?.Floor?.length) / 2) - (feetToThreeD(subElement.width) / 2)) - (feetToThreeD(subElement.positionX))), -((feetToThreeD(wall.height) / 2) - (feetToThreeD(subElement.height) / 2)), 0]
+                                        :
+                                        WI === 1
+                                            ?
+                                            [0, -((feetToThreeD(wall.height) / 2) - (feetToThreeD(subElement.height) / 2)), -(((feetToThreeD(elements?.Floor?.width) / 2) - (feetToThreeD(subElement.width) / 2)) - (feetToThreeD(subElement.positionX)))]
+                                            :
+                                            WI === 2
+                                                ?
+                                                [(((feetToThreeD(elements?.Floor?.length) / 2) - (feetToThreeD(subElement.width) / 2)) - (feetToThreeD(subElement.positionX))), -((feetToThreeD(wall.height) / 2) - (feetToThreeD(subElement.height) / 2)), 0]
+                                                :
+                                                [0, -((feetToThreeD(wall.height) / 2) - (feetToThreeD(subElement.height) / 2)), (((feetToThreeD(elements?.Floor?.width) / 2) - (feetToThreeD(subElement.width) / 2)) - (feetToThreeD(subElement.positionX)))]
+                                }>
+                                    <boxGeometry args={
+                                        WI === 0 || WI === 2 ?
+                                            [feetToThreeD(subElement.width), feetToThreeD(subElement.height), feetToThreeD(0.55)]
+                                            :
+                                            [feetToThreeD(0.55), feetToThreeD(subElement.height), feetToThreeD(subElement.width)]
+                                    } />
                                     <meshStandardMaterial map={tempdoor1} attach="material" color="white" />
                                 </mesh>
                             </>
