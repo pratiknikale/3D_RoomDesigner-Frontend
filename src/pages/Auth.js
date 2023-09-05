@@ -4,6 +4,7 @@ import { Button, Container, Grid, Typography, TextField, Box, Paper, Link } from
 import { useNavigate } from "react-router-dom";
 import { signinFieldHandler, loginFieldHandler, loginSubmit, submitSignup } from "./handlers/authHandlers";
 import { useSelector, useDispatch } from "react-redux";
+import { ClipLoader } from "react-spinners";
 
 // import {protectedRouteTest} from "../api/api";
 
@@ -26,6 +27,8 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
   const [isSignup, setIsSignup] = useState(false);
   const [signupData, setSignupData] = useState(signupFormFields);
   const [loginData, setLoginData] = useState(loginFormFields);
+
+  const [loading, setLoading] = useState(false); 
 
   const switchSigninLogin = (e, operation) => {
     e.preventDefault();
@@ -183,7 +186,7 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
                   <Grid item xs={12} sm={12} style={{ display: "flex", justifyContent: "center" }}>
                     <Button
                       onClick={(e) => {
-                        submitSignup(e, signupData, messageOpen, setMessageOpen, navigate, dispatch);
+                        submitSignup(e, signupData, messageOpen, setMessageOpen, navigate, dispatch,setLoading);
                       }}
                       variant="contained"
                       sx={{
@@ -194,6 +197,16 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
                           "linear-gradient(155deg, rgba(21, 80, 113, 1)0%, rgba(101, 157, 189, 1)59%, rgba(101, 157, 189, 1)100%)",
                       }}
                     >
+                      <ClipLoader
+                        color='white'
+                        radius={5}
+                        height={10}
+                        width={3}
+                        size={20}
+                        loading={loading}
+                        cssOverride={{ padding: "0px", margin: "0px", marginRight: "10px" }}
+                      />
+
                       Sign up
                     </Button>
                   </Grid>
@@ -240,10 +253,9 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
                   </Grid>
                   <Grid item xs={12} sm={12} />
                   <Grid item xs={12} sm={12} style={{ display: "flex", justifyContent: "center" }}>
+
                     <Button
-                      onClick={(e) => {
-                        loginSubmit(e, loginData, messageOpen, setMessageOpen, navigate, dispatch);
-                      }}
+                      onClick={(e) => { loginSubmit(e, loginData, messageOpen, setMessageOpen, navigate, dispatch, setLoading); }}
                       variant="contained"
                       sx={{
                         width: "260px",
@@ -253,8 +265,18 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
                           "linear-gradient(155deg, rgba(21, 80, 113, 1)0%, rgba(101, 157, 189, 1)59%, rgba(101, 157, 189, 1)100%)",
                       }}
                     >
-                      Login
+                      <ClipLoader
+                        color='white' 
+                        radius={5}
+                        height={10}
+                        width={3}
+                        size={20}
+                        loading={loading}
+                        cssOverride={{padding: "0px", margin: "0px", marginRight:"10px"}}
+                        />
+                        Log in
                     </Button>
+
                   </Grid>
                 </Grid>
               )}

@@ -11,8 +11,9 @@ const loginFieldHandler = (e, loginData, setLoginData) => {
   setLoginData({ ...loginData, [e.target.name]: e.target.value });
 };
 
-const submitSignup = async (e, signupData, messageOpen, setMessageOpen, navigate, dispatch) => {
+const submitSignup = async (e, signupData, messageOpen, setMessageOpen, navigate, dispatch,setLoading) => {
   e.preventDefault();
+  setLoading(true)
   await signup(signupData, navigate).then((result) => {
     if (result.error) {
       setMessageOpen({ show: true, status: "failed", message: result.message });
@@ -27,10 +28,13 @@ const submitSignup = async (e, signupData, messageOpen, setMessageOpen, navigate
         setMessageOpen({ ...messageOpen, status: "success", show: false });
       }, 4000);
     }
+  }).finally(()=>{
+    setLoading(false);
   });
 };
-const loginSubmit = async (e, loginData, messageOpen, setMessageOpen, navigate, dispatch) => {
+const loginSubmit = async (e, loginData, messageOpen, setMessageOpen, navigate, dispatch, setLoading) => {
   e.preventDefault();
+  setLoading(true);
   await login(loginData, navigate).then((result) => {
     if (result.error) {
       setMessageOpen({ show: true, status: "failed", message: result.message });
@@ -45,8 +49,12 @@ const loginSubmit = async (e, loginData, messageOpen, setMessageOpen, navigate, 
         setMessageOpen({ ...messageOpen, status: "success", show: false });
       }, 4000);
     }
+  }).finally(()=>{
+    setLoading(false);
   });
 };
+
+
 
 const logout = async (e, dispatch, navigate) => {
   e.preventDefault();
