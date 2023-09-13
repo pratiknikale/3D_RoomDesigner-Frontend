@@ -12,6 +12,24 @@ const DashboardPage = () => {
     const user = useSelector((state) => state.user.user);
     const [newProj, setNewProj] = useState(false);
 
+    const [searchValue, setSearchValue] = useState('');
+    const placeholder = 'Search Project';
+
+    useEffect(() => {
+        let currentIndex = 0;
+        const timeoutId = setTimeout(function addLetter() {
+            if (currentIndex < placeholder.length) {
+                setSearchValue(prevValue => prevValue + placeholder[currentIndex]);
+                currentIndex++;
+                setTimeout(addLetter, 50);
+            } else {
+                setSearchValue(placeholder); // Set the searchValue to the full placeholder text
+            }
+        }, 50);
+
+        return () => clearTimeout(timeoutId);
+    }, []);
+
     useEffect(() => {
         if (!user.email) {
             const localStorageProfile = localStorage.getItem("3D-designerProfile");
@@ -24,7 +42,7 @@ const DashboardPage = () => {
         <>
             <Container style={{ paddingTop: "90px", width: "100%", height: "100%", paddingBottom: "25px", boxSizing: "border-box" }} fluid>
                 <Box style={{ backgroundColor: "#e2e2e1", width: "100%", height: "100%", padding: "0px", margin: "0px", boxSizing: "border-box" }}>
-                    <DashboardHead newProj={newProj} setNewProj={setNewProj} />
+                    <DashboardHead newProj={newProj} setNewProj={setNewProj} searchValue={searchValue} />
                     {!newProj ?
                         <DashboardTable />
                         :
