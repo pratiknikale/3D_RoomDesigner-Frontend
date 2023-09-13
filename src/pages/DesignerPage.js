@@ -73,7 +73,7 @@ const DesignerPage = () => {
             >
               <Typography>Flooring/Room Dimension</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails style={{ padding: "5px" }}>
               <Flooring />
             </AccordionDetails>
           </Accordion>
@@ -86,7 +86,7 @@ const DesignerPage = () => {
             >
               <Typography>Walls</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails style={{ padding: "5px" }}>
               <Walls />
             </AccordionDetails>
           </Accordion>
@@ -99,7 +99,7 @@ const DesignerPage = () => {
             >
               <Typography>Accordion 2</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails style={{ padding: "5px" }}>
               <Typography>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
                 malesuada lacus ex, sit amet blandit leo lobortis eget.
@@ -115,7 +115,7 @@ const DesignerPage = () => {
             >
               <Typography>Accordion 2</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails style={{ padding: "5px" }}>
               <Typography>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
                 malesuada lacus ex, sit amet blandit leo lobortis eget.
@@ -131,7 +131,7 @@ const DesignerPage = () => {
             >
               <Typography>Accordion 2</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails style={{ padding: "5px" }}>
               <Typography>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
                 malesuada lacus ex, sit amet blandit leo lobortis eget.
@@ -147,7 +147,7 @@ const DesignerPage = () => {
             >
               <Typography>Accordion 2</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails style={{ padding: "5px" }}>
               <Typography>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
                 malesuada lacus ex, sit amet blandit leo lobortis eget.

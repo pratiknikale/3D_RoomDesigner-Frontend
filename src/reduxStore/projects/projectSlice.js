@@ -40,9 +40,9 @@ export const projectSlice = createSlice({
 
         },
         createWall: (state, { payload }) => {
-            // state.currentProjectDetails.elements[payload.name].push(payload.value);
+            state.currentProjectDetails.elements[`${payload.name}`].push(payload.value);
             // return { ...state.currentProjectDetails.elements, Wall: [payload, ...state.currentProjectDetails.elements.Wall] }
-            return { ...state, currentProjectDetails: { ...state.currentProjectDetails, elements: { ...state.currentProjectDetails.elements, Wall: [payload.value, ...state.currentProjectDetails.elements.Wall] } } }
+            // return { ...state, currentProjectDetails: { ...state.currentProjectDetails, elements: { ...state.currentProjectDetails.elements, Wall: [payload.value, ...state.currentProjectDetails.elements.Wall] } } }
         },
         updateWallDetails: (state, { payload }) => {
             switch (payload.name) {
@@ -68,7 +68,33 @@ export const projectSlice = createSlice({
                     // return { ...state, currentProjectDetails: { ...state.currentProjectDetails, elements: { ...state.currentProjectDetails.elements, Wall: [...state.currentProjectDetails.elements.Wall, [payload.index]: {}] } } }
                     break;
             }
-        }
+        },
+        updateWallElement: ((state, { payload }) => {
+            switch (payload.name) {
+                case "height":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].height = payload.value;
+                    break;
+                case "length":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].length = payload.value;
+                    break;
+                case "width":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].width = payload.value;
+                    break;
+                case "positionX":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].positionX = payload.value;
+                    break;
+                case "positionY":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].positionY = payload.value;
+                    break;
+                case "positionZ":
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements[payload.index].positionZ = payload.value;
+                    break;
+                case "delete":
+                    console.log(payload);
+                    state.currentProjectDetails.elements.Wall[payload.wallIndex].subElements.splice(payload.subElementIndex, 1);
+                    break;
+            }
+        })
     }
 });
 
@@ -79,7 +105,8 @@ export const {
     setCurrentProjectDetails,
     updateFloorDetails,
     createWall,
-    updateWallDetails
+    updateWallDetails,
+    updateWallElement
 } = projectSlice.actions;
 
 export default projectSlice.reducer;
