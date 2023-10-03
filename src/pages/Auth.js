@@ -28,7 +28,7 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
   const [signupData, setSignupData] = useState(signupFormFields);
   const [loginData, setLoginData] = useState(loginFormFields);
 
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const switchSigninLogin = (e, operation) => {
     e.preventDefault();
@@ -53,7 +53,7 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
   }, []);
 
   const google = () => {
-    window.open(`${process.env.REACT_APP_BACKEND_BASE_URL}/userAuth/google/callback`, "_self");
+    window.open(`${process.env.REACT_APP_BACKEND_BASE_URL}/userAuth/google/callback`, "_self", { withCredentials: true });
   };
 
   // useEffect(() => {
@@ -186,7 +186,7 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
                   <Grid item xs={12} sm={12} style={{ display: "flex", justifyContent: "center" }}>
                     <Button
                       onClick={(e) => {
-                        submitSignup(e, signupData, messageOpen, setMessageOpen, navigate, dispatch,setLoading);
+                        submitSignup(e, signupData, messageOpen, setMessageOpen, navigate, dispatch, setLoading);
                       }}
                       variant="contained"
                       sx={{
@@ -266,15 +266,15 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
                       }}
                     >
                       <ClipLoader
-                        color='white' 
+                        color='white'
                         radius={5}
                         height={10}
                         width={3}
                         size={20}
                         loading={loading}
-                        cssOverride={{padding: "0px", margin: "0px", marginRight:"10px"}}
-                        />
-                        Log in
+                        cssOverride={{ padding: "0px", margin: "0px", marginRight: "10px" }}
+                      />
+                      Log in
                     </Button>
 
                   </Grid>
