@@ -2,15 +2,16 @@ import React, { useEffect } from "react";
 import { Grid, Accordion, AccordionSummary, AccordionDetails, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useSelector, useDispatch } from "react-redux";
-import { setLoggedUser } from "../reduxStore/user/userSlice";
-import { setCurrentProjectDetails } from "../reduxStore/projects/projectSlice";
 import { useParams } from "react-router-dom";
-import { getSelectedProjDetails } from "../api/projectApi";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
-import Main3Dmodal from "./threeDcomponents/Main3Dmodal";
-import Flooring from "./commonComponents/elementPanelsComponents/Flooring";
-import Walls from "./commonComponents/elementPanelsComponents/Walls";
+
+import { setLoggedUser } from "../../reduxStore/user/userSlice";
+import { setCurrentProjectDetails } from "../../reduxStore/projects/projectSlice";
+import { getSelectedProjDetails } from "../../api/projectApi";
+import Main3Dmodal from "../threeDcomponents/Main3Dmodal";
+import Flooring from "../commonComponents/elementPanelsComponents/Flooring";
+import Walls from "../commonComponents/elementPanelsComponents/Walls";
 
 const DesignerPage = () => {
   const dispatch = useDispatch();
