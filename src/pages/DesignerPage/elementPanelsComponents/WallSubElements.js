@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Grid, Button, FormControl, InputLabel, Select, MenuItem, TextField } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { updateWallDetails, updateWallElement } from "../../../../reduxStore/projects/projectSlice";
-
-
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+import { updateWallDetails, updateWallElement } from "../../../reduxStore/projects/projectSlice";
 
 
 const WallsSubElements = ({ wallIndex }) => {

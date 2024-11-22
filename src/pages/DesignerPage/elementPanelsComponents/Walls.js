@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { Grid, Button, TextField, FormGroup, FormControlLabel, Checkbox, FormControl, InputLabel } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { createWall, updateWallDetails } from "../../../reduxStore/projects/projectSlice";
-import { updateWall } from "../../../api/elementsApi";
-import { ColorPicker } from '@wellbees/color-picker-input'
-import TextureDropdown from "../components/textuiring/textureDropdown";
-
-import wallTextureDetails from "../../../assets/textures/wallTextureList";
-import WallsSubElements from "../components/wallSubElements/WallSubElements";
-
-
-
+import { ColorPicker } from '@wellbees/color-picker-input';
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import { createWall, updateWallDetails } from "../../../reduxStore/projects/projectSlice";
+import { updateWall } from "../../../api/elementsApi";
+import TextureDropdown from "../../../components/textureDropdown";
+import wallTextureDetails from "../../../assets/textures/wallTextureList";
+import WallsSubElements from "./WallSubElements";
 
 
 const Walls = () => {

@@ -1,6 +1,5 @@
 import "./App.css";
 import { useState, forwardRef, lazy, Suspense } from "react";
-import ProtectedRoute from "./pages/commonComponents/protectedRoutes";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
@@ -9,7 +8,9 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import Header from "./pages/commonComponents/layOuts/Header";
+
+import Header from "./pages/layOuts/Header";
+import ProtectedRoute from "./pages/Auth/protectedRoutes";
 
 const Auth = lazy(() => import("./pages/Auth"));
 const DesignerPage = lazy(() => import("./pages/DesignerPage"));

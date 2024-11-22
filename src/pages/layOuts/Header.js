@@ -9,9 +9,10 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+
 import { logout } from "../../handlers/authHandlers";
 
-import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Header() {
   const user = useSelector((state) => state.user.user);

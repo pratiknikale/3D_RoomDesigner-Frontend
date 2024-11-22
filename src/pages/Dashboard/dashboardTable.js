@@ -8,8 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { getProjectList, deleteProject } from "../../api/projectApi";
 
+import { getProjectList, deleteProject } from "../../api/projectApi";
 import { setProjectList, deleteProjectRedux } from "../../reduxStore/projects/projectSlice";
 // import { projects } from "../../api/dummyApiData/dummyData";
 

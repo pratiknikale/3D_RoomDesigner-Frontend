@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { OrbitControls, PerspectiveCamera, MeshReflectorMaterial, useHelper, useTexture } from "@react-three/drei";
-import { angleRadians } from "../utils/angle";
-import { feetToThreeD } from "../utils/unitMaping";
 import { useSelector } from "react-redux";
-import useSetTexture from "../../customHooks/useSetTexture";
 import { PointLightHelper, SpotLightHelper } from "three";
 
+import useSetTexture from "../../customHooks/useSetTexture";
+import { angleRadians } from "../../utils/angle";
+import { feetToThreeD } from "../../utils/unitMaping";
 import tempDoor from "../../assets/tempDoor.jpg";
 
 const Main3Dmodal = () => {

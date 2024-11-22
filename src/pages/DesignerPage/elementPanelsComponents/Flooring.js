@@ -1,11 +1,10 @@
 import React from "react";
 import { Grid, Button, TextField, FormControl, InputLabel } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
+
 import { updateFloorDetails } from "../../../reduxStore/projects/projectSlice";
 import { updateFloor } from "../../../api/elementsApi";
-
-
-import TextureDropdown from "../components/textuiring/textureDropdown";
+import TextureDropdown from "../../../components/textureDropdown";
 import floorTextureDetails from "../../../assets/textures/floorTextureList";
 
 const Flooring = () => {
