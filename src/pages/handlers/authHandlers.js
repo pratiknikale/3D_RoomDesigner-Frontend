@@ -60,11 +60,11 @@ const logout = async (e, dispatch, navigate) => {
   e.preventDefault();
   localStorage.clear("3D-designerProfile");
   dispatch(logoutUser());
-  let res = await logOut();
-  if (res.statusText == "OK") {
-    dispatch(setProjectList([]))
-    navigate("/");
-  }
+  // let res = await logOut();
+  // if (res.statusText == "OK") {
+  dispatch(setProjectList([]))
+  navigate("/");
+  // }
 };
 
 export { signinFieldHandler, loginFieldHandler, submitSignup, loginSubmit, logout };

@@ -25,7 +25,7 @@ const DesignerPage = () => {
     // console.log(details)
   }
   useEffect(() => {
-    if (!user.email) {
+    if (!user?.result?.email) {
       const localStorageProfile = localStorage.getItem("3D-designerProfile");
       if (localStorageProfile) {
         dispatch(setLoggedUser(JSON.parse(localStorageProfile)));
