@@ -52,9 +52,9 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
     }
   }, []);
 
-  const google = () => {
-    window.open(`${process.env.REACT_APP_BACKEND_BASE_URL}/userAuth/google/callback`, "_self", { withCredentials: true });
-  };
+  // const google = () => {
+  //   window.open(`${process.env.REACT_APP_BACKEND_BASE_URL}/userAuth/google/callback`, "_self", { withCredentials: true });
+  // };
 
   // useEffect(() => {
   //     if (user.token) {
@@ -280,7 +280,7 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
                   </Grid>
                 </Grid>
               )}
-              <hr style={{ marginTop: "22px", marginBottom: "22px" }} />
+              {/* <hr style={{ marginTop: "22px", marginBottom: "22px" }} />
               <Button
                 onClick={google}
                 variant="outlined"
@@ -292,7 +292,7 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
               >
                 <img style={{ width: "25px", paddingRight: "5px" }} src={googleLogo} />
                 Continue with google
-              </Button>
+              </Button> */}
             </div>
           </Box>
         </Paper>

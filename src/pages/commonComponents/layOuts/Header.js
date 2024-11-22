@@ -48,9 +48,9 @@ export default function Header() {
             3DHomeDesigner {location.pathname.split("/")[1] == "DesignerPage" && <span style={{ fontSize: "16px", fontWeight: "400" }}>/ {projectName}</span>}
           </Typography>
 
-          {user.email && (
+          {user?.result?.email && (
             <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
-              <span onClick={(e) => handleMenu(e)}>{user.firstName} {user.lastName}</span>
+              <span onClick={(e) => handleMenu(e)}>{user?.result?.firstName} {user?.result?.lastName}</span>
               <IconButton
                 size="large"
                 aria-label="account of current user"
