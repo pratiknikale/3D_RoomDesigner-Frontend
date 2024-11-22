@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import googleLogo from "../assets/googleLogo.png";
+import googleLogo from "../../assets/googleLogo.png";
 import { Button, Container, Grid, Typography, TextField, Box, Paper, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { signinFieldHandler, loginFieldHandler, loginSubmit, submitSignup } from "./handlers/authHandlers";
+import { signinFieldHandler, loginFieldHandler, loginSubmit, submitSignup } from "../handlers/authHandlers";
 import { useSelector, useDispatch } from "react-redux";
 import { ClipLoader } from "react-spinners";
 

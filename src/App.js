@@ -13,7 +13,7 @@ import Header from "./pages/commonComponents/layOuts/Header";
 
 const Auth = lazy(() => import("./pages/Auth"));
 const DesignerPage = lazy(() => import("./pages/DesignerPage"));
-const DashboardPage = lazy(() => import("./pages/DashboardPage"));
+const DashboardPage = lazy(() => import("./pages/Dashboard"));
 
 // color comb
 // 1. #659DBD
