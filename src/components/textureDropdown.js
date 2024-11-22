@@ -1,6 +1,7 @@
 import React from "react";
 import { Select, MenuItem } from "@mui/material";
-import fetchTexture from "../../../../assets/textures/fetchTexture";
+
+import fetchTexture from "../assets/textures/fetchTexture";
 
 const textureDropdown = ({ name, materialValue, textureChangeHandler, textureList, label, index }) => {
 

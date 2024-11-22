@@ -9,9 +9,9 @@ import { Suspense } from "react";
 import { setLoggedUser } from "../../reduxStore/user/userSlice";
 import { setCurrentProjectDetails } from "../../reduxStore/projects/projectSlice";
 import { getSelectedProjDetails } from "../../api/projectApi";
-import Main3Dmodal from "../threeDcomponents/Main3Dmodal";
-import Flooring from "../commonComponents/elementPanelsComponents/Flooring";
-import Walls from "../commonComponents/elementPanelsComponents/Walls";
+import Main3Dmodal from "./Main3Dmodal";
+import Flooring from "./elementPanelsComponents/Flooring";
+import Walls from "./elementPanelsComponents/Walls";
 
 const DesignerPage = () => {
   const dispatch = useDispatch();

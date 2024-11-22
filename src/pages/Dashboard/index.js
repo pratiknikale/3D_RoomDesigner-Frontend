@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
+
 import { setLoggedUser } from "../../reduxStore/user/userSlice";
-import DashboardHead from "../commonComponents/dashboardHead";
-import DashboardTable from "../commonComponents/dashboardTable";
-import NewProject from "../commonComponents/newProjectDashboard";
+import DashboardHead from "./dashboardHead";
+import DashboardTable from "./dashboardTable";
+import NewProject from "./newProjectDashboard";
 
 const DashboardPage = () => {
     const dispatch = useDispatch();
