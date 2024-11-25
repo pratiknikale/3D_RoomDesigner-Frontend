@@ -1,44 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Grid, Typography, TextField, Box, Paper, Link } from "@mui/material";
+import { Button, Container, Grid, Typography, Box, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { ClipLoader } from "react-spinners";
 
-import { signinFieldHandler, loginFieldHandler, loginSubmit, submitSignup } from "../../handlers/authHandlers";
-import googleLogo from "../../assets/googleLogo.png";
+// import googleLogo from "../../assets/googleLogo.png";
+import SignupView from "./SignupView";
+import LoginView from "./LoginView";
 
 // import {protectedRouteTest} from "../api/api";
 
-const signupFormFields = {
-  FirstName: "",
-  LastName: "",
-  Email: "",
-  Password: "",
-};
-const loginFormFields = {
-  Email: "",
-  Password: "",
-};
-
 const Auth = ({ messageOpen, setMessageOpen }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // const user = useSelector((state) => state.user.user);
-  const [isSignup, setIsSignup] = useState(false);
-  const [signupData, setSignupData] = useState(signupFormFields);
-  const [loginData, setLoginData] = useState(loginFormFields);
+  const [loginSignupView, setLoginSignupView] = useState("login");
 
-  const [loading, setLoading] = useState(false);
-
-  const switchSigninLogin = (e, operation) => {
-    e.preventDefault();
-    if (operation === "login") {
-      setIsSignup(false);
-    } else if (operation === "signup") {
-      setIsSignup(true);
-    }
-  };
+  // Toggle between login and signup views
+  const handleToggleView = (view) => setLoginSignupView(view);
 
   // useEffect(() => {
   //   (async function () {
@@ -78,15 +55,13 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
                 <Grid item xs={12} sm={6}>
                   <Typography align="center" variant="h6" gutterBottom sx={{ paddingBottom: 6 }}>
                     <Button
-                      onClick={(e) => {
-                        switchSigninLogin(e, "login");
-                      }}
+                      onClick={() => handleToggleView("login")}
                       variant="contained"
                       style={{
                         borderRadius: "15px",
                         width: "100%",
-                        color: isSignup ? "black" : "white",
-                        background: isSignup
+                        color: loginSignupView === "signup" ? "black" : "white",
+                        background: loginSignupView === "signup"
                           ? "none"
                           : "linear-gradient(155deg, rgba(21, 80, 113, 1)0%, rgba(101, 157, 189, 1)59%, rgba(101, 157, 189, 1)100%)",
                       }}
@@ -98,15 +73,13 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
                 <Grid item xs={12} sm={6}>
                   <Typography align="center" variant="h6" gutterBottom sx={{ paddingBottom: 6 }}>
                     <Button
-                      onClick={(e) => {
-                        switchSigninLogin(e, "signup");
-                      }}
+                      onClick={() => handleToggleView("signup")}
                       variant="contained"
                       style={{
                         borderRadius: "15px",
                         width: "100%",
-                        color: !isSignup ? "black" : "white",
-                        background: !isSignup
+                        color: loginSignupView !== "signup" ? "black" : "white",
+                        background: loginSignupView !== "signup"
                           ? "none"
                           : "linear-gradient(155deg, rgba(21, 80, 113, 1)0%, rgba(101, 157, 189, 1)59%, rgba(101, 157, 189, 1)100%)",
                       }}
@@ -119,167 +92,16 @@ const Auth = ({ messageOpen, setMessageOpen }) => {
               <Grid item xs={12} sm={3} />
             </Grid>
             <div>
-              {isSignup ? (
-                <Grid container spacing={3}>
-                  {/* signUp Container */}
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      required
-                      id="firstName"
-                      name="FirstName"
-                      label="First Name"
-                      fullWidth
-                      size="small"
-                      autoComplete="off"
-                      variant="outlined"
-                      InputProps={{ sx: { borderRadius: 3, border: "1px solid #e2e2e1" } }}
-                      value={signupData.FirstName}
-                      onChange={(e) => signinFieldHandler(e, signupData, setSignupData)}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      required
-                      id="lastName"
-                      name="LastName"
-                      label="Last Name"
-                      fullWidth
-                      size="small"
-                      autoComplete="off"
-                      variant="outlined"
-                      InputProps={{ sx: { borderRadius: 3, border: "1px solid #e2e2e1" } }}
-                      value={signupData.LastName}
-                      onChange={(e) => signinFieldHandler(e, signupData, setSignupData)}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={12}>
-                    <TextField
-                      required
-                      id="emailID"
-                      name="Email"
-                      label="Email"
-                      fullWidth
-                      size="small"
-                      autoComplete="off"
-                      variant="outlined"
-                      InputProps={{ sx: { borderRadius: 3, border: "1px solid #e2e2e1" } }}
-                      value={signupData.Email}
-                      onChange={(e) => signinFieldHandler(e, signupData, setSignupData)}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={12}>
-                    <TextField
-                      required
-                      id="password"
-                      name="Password"
-                      label="Password"
-                      type="password"
-                      fullWidth
-                      size="small"
-                      autoComplete="off"
-                      variant="outlined"
-                      InputProps={{ sx: { borderRadius: 3, border: "1px solid #e2e2e1" } }}
-                      value={signupData.Password}
-                      onChange={(e) => signinFieldHandler(e, signupData, setSignupData)}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={12} />
-                  <Grid item xs={12} sm={12} style={{ display: "flex", justifyContent: "center" }}>
-                    <Button
-                      onClick={(e) => {
-                        submitSignup(e, signupData, messageOpen, setMessageOpen, navigate, dispatch, setLoading);
-                      }}
-                      variant="contained"
-                      sx={{
-                        width: "260px",
-                        borderRadius: "15px",
-                        color: "white",
-                        background:
-                          "linear-gradient(155deg, rgba(21, 80, 113, 1)0%, rgba(101, 157, 189, 1)59%, rgba(101, 157, 189, 1)100%)",
-                      }}
-                    >
-                      <ClipLoader
-                        color='white'
-                        radius={5}
-                        height={10}
-                        width={3}
-                        size={20}
-                        loading={loading}
-                        cssOverride={{ padding: "0px", margin: "0px", marginRight: "10px" }}
-                      />
-
-                      Sign up
-                    </Button>
-                  </Grid>
-                </Grid>
+              {loginSignupView === "signup" ? (
+                <SignupView
+                  messageOpen={messageOpen}
+                  setMessageOpen={setMessageOpen}
+                />
               ) : (
-                <Grid container spacing={3}>
-                  {/* login Container */}
-                  <Grid item xs={12} sm={12}>
-                    <TextField
-                      required
-                      id="emailID"
-                      name="Email"
-                      label="Email"
-                      fullWidth
-                      size="small"
-                      autoComplete="off"
-                      variant="outlined"
-                      InputProps={{ sx: { borderRadius: 3, border: "1px solid #e2e2e1" } }}
-                      value={loginData.Email}
-                      onChange={(e) => loginFieldHandler(e, loginData, setLoginData)}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={12}>
-                    <TextField
-                      required
-                      id="password"
-                      name="Password"
-                      label="Password"
-                      type="password"
-                      fullWidth
-                      size="small"
-                      autoComplete="off"
-                      variant="outlined"
-                      InputProps={{ sx: { borderRadius: 3, border: "1px solid #e2e2e1" } }}
-                      value={loginData.Password}
-                      onChange={(e) => loginFieldHandler(e, loginData, setLoginData)}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} sm={12} style={{ paddingTop: "8px" }}>
-                    <Link href="#" underline="hover">
-                      Forgot Password*
-                    </Link>
-                  </Grid>
-                  <Grid item xs={12} sm={12} />
-                  <Grid item xs={12} sm={12} style={{ display: "flex", justifyContent: "center" }}>
-
-                    <Button
-                      onClick={(e) => { loginSubmit(e, loginData, messageOpen, setMessageOpen, navigate, dispatch, setLoading); }}
-                      variant="contained"
-                      sx={{
-                        width: "260px",
-                        borderRadius: "15px",
-                        color: "white",
-                        background:
-                          "linear-gradient(155deg, rgba(21, 80, 113, 1)0%, rgba(101, 157, 189, 1)59%, rgba(101, 157, 189, 1)100%)",
-                      }}
-                    >
-                      <ClipLoader
-                        color='white'
-                        radius={5}
-                        height={10}
-                        width={3}
-                        size={20}
-                        loading={loading}
-                        cssOverride={{ padding: "0px", margin: "0px", marginRight: "10px" }}
-                      />
-                      Log in
-                    </Button>
-
-                  </Grid>
-                </Grid>
+                <LoginView
+                  messageOpen={messageOpen}
+                  setMessageOpen={setMessageOpen}
+                />
               )}
               {/* <hr style={{ marginTop: "22px", marginBottom: "22px" }} />
               <Button
