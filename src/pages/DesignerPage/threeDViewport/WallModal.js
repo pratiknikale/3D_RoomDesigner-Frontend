@@ -1,32 +1,20 @@
 import React, { useEffect, useRef } from "react";
-import { OrbitControls, PerspectiveCamera, MeshReflectorMaterial, useHelper, useTexture } from "@react-three/drei";
+import { useTexture } from "@react-three/drei";
 import { useSelector } from "react-redux";
-import { PointLightHelper, SpotLightHelper } from "three";
 
-import useSetTexture from "../../customHooks/useSetTexture";
-import { angleRadians } from "../../utils/angle";
-import { feetToThreeD } from "../../utils/unitMaping";
-import tempDoor from "../../assets/tempDoor.jpg";
+import useSetTexture from "../../../customHooks/useSetTexture";
+import { feetToThreeD } from "../../../utils/unitMaping";
+import tempDoor from "../../../assets/tempDoor.jpg";
 
-const Main3Dmodal = () => {
-    const elements = useSelector((state) => state.projects.currentProjectDetails.elements)
-    const floorTexture = useSetTexture(elements?.Floor?.material);
+const WallModal = () => {
+    const elements = useSelector((state) => state.projects.currentProjectDetails.elements);
     const wallpaperTexture = [useSetTexture(elements?.Wall[0]?.material), useSetTexture(elements?.Wall[1]?.material), useSetTexture(elements?.Wall[2]?.material), useSetTexture(elements?.Wall[3]?.material)];
 
     const tempdoor1 = useTexture(tempDoor);
 
-    const floorRef = useRef();
     const wallRef = [useRef(), useRef(), useRef(), useRef()];
-    const lightRef = useRef();
-    const spotlightLight1Ref = useRef();
-    const spotlightLight2Ref = useRef();
-    useHelper(false && lightRef, PointLightHelper, 1, "red");
-    useHelper(true && spotlightLight1Ref, SpotLightHelper, "blue");
-    useHelper(true && spotlightLight2Ref, SpotLightHelper, "red");
+
     useEffect(() => {
-        if (floorRef.current) {
-            floorRef.current.needsUpdate = true
-        }
         if (wallRef[0].current) {
             wallRef[0].current.needsUpdate = true
         }
@@ -39,53 +27,13 @@ const Main3Dmodal = () => {
         if (wallRef[3].current) {
             wallRef[3].current.needsUpdate = true
         }
-        // if (spotlightLight1Ref.current) {
-        //     spotlightLight1Ref.current.target.position.x = 2;
-        //     spotlightLight1Ref.current.target.position.z = 0.1;
-        // }
 
-    }, [elements?.Floor?.material, elements?.Wall])
+    }, [elements?.Wall])
     return (
         <>
-            <PerspectiveCamera position={[-2, 4, 5]} makeDefault />
-            <OrbitControls
-                // enablePan={false}
-                enableZoom={true} maxPolarAngle={angleRadians(85)} minPolarAngle={angleRadians(20)} />
-
-            {/* flooring */}
-            <mesh rotation={[-angleRadians(90), 0, 0]}
-                position={[0, 0, 0]}
-                receiveShadow>
-                <planeGeometry attach="geometry" args={[feetToThreeD(elements?.Floor?.length), feetToThreeD(elements?.Floor?.width)]} />
-                {/* <meshPhongMaterial ref={floorRef} shininess={400} map={elements?.Floor?.material === "None" || elements?.Floor?.material === "" ? "" : floorTexture} attach="material" color="white" /> */}
-                <MeshReflectorMaterial
-                    color="white"
-                    roughness={0.4}
-                    blur={[100, 100]} // Blur ground reflections (width, heigt), 0 skips blur
-                    mixBlur={4} // How much blur mixes with surface roughness (default = 1)
-                    mixStrength={4.5} // Strength of the reflections
-                    mixContrast={1} // Contrast of the reflections
-                    resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality, slower
-                    depthScale={0.2} // Scale the depth factor (0 = no depth, default = 0)
-                    minDepthThreshold={0.9} // Lower edge for the depthTexture interpolation (default = 0)
-                    maxDepthThreshold={1} // Upper edge for the depthTexture interpolation (default = 0)
-                    depthToBlurRatioBias={0.25} // Adds a bias factor to the depthTexture before calculating the blur amount [blurFactor = blurTexture * (depthTexture + bias)]. It accepts values between 0 and 1, default is 0.25. An amount > 0 of bias makes sure that the blurTexture is not too sharp because of the multiplication with the depthTexture
-                    debug={0}
-                    reflectorOffset={0.2} // Offsets the virtual camera that projects the reflection. Useful when the reflective surface is some distance from the object's origin (default = 0)
-                    ref={floorRef}
-                    map={elements?.Floor?.material === "None" || elements?.Floor?.material === "" ? "" : floorTexture}
-                />
-            </mesh>
-            {/* flooring */}
-
-
-
-
-            {/* walls */}
-            {/* walls */}
-            {/* walls */}
             {elements?.Wall?.length > 0 && elements?.Wall.map((wall, WI) => {
                 return <>
+                    {/* wall mesh modal */}
                     <mesh visible={wall.visible}
                         position={
                             WI == 0
@@ -112,9 +60,12 @@ const Main3Dmodal = () => {
                                     :
                                     [feetToThreeD(wall.width), feetToThreeD(wall.height), feetToThreeD((elements?.Floor?.width) ? (elements?.Floor?.width) : 0)]
                             } />
+
+                        {/* adds texture to wall */}
                         <meshStandardMaterial ref={wallRef[WI]} map={elements?.Wall[WI]?.material === "None" || elements?.Wall[WI]?.material === "" ? "" : wallpaperTexture[WI]} attach="material" color={elements?.Wall[WI]?.material === "None" || elements?.Wall[WI]?.material === "" ? wall.color : "white"} />
                         {wall.subElements.length > 0 && wall.subElements.map((subElement, SEI) => {
                             return <>
+                                {/* door mesh modal */}
                                 <mesh position={
                                     WI === 0
                                         ?
@@ -136,6 +87,8 @@ const Main3Dmodal = () => {
                                             :
                                             [feetToThreeD(0.55), feetToThreeD(subElement.height), feetToThreeD(subElement.width)]
                                     } />
+
+                                    {/* adds texture to door */}
                                     <meshStandardMaterial map={tempdoor1} attach="material" color="white" />
                                 </mesh>
                             </>
@@ -144,37 +97,8 @@ const Main3Dmodal = () => {
                     </mesh>
                 </>
             })}
-            {/* walls */}
-            {/* walls */}
-            {/* walls */}
-
-
-            {/* <ambientLight args={["#ffffff", 0]} /> */}
-            {/* point light virtual source */}
-            <mesh position={[0, feetToThreeD(10), 0]}>
-                <sphereGeometry attach="geometry" args={[0.1]} />
-                <meshStandardMaterial emissive={"white"} emissiveIntensity={10} attach="material" color="white" />
-            </mesh >
-            <pointLight ref={lightRef} args={["#ffffff", 35]} position={[0, feetToThreeD(10), 0]} castShadow />
-            {/* point light virtual source */}
-
-            {/* spotlights */}
-            {/* <mesh position={[feetToThreeD(7.7), feetToThreeD(10), 0]}>
-                <sphereGeometry attach="geometry" args={[0.1]} />
-                <meshStandardMaterial emissive={"blue"} emissiveIntensity={10} attach="material" color="blue" />
-            </mesh >
-            <spotLight ref={spotlightLight1Ref} args={["blue", 55]} penumbra={0} distance={5} angle={0.4} position={[feetToThreeD(7.7), feetToThreeD(10), 0]} castShadow />
-
-            <mesh position={[0, feetToThreeD(10), -feetToThreeD(5.6)]}>
-                <sphereGeometry attach="geometry" args={[0.1]} />
-                <meshStandardMaterial emissive={"red"} emissiveIntensity={10} attach="material" color="red" />
-            </mesh >
-            <spotLight ref={spotlightLight2Ref} args={["red", 15]} penumbra={0} distance={5} angle={0.4} position={[0, feetToThreeD(10), -feetToThreeD(5.6)]} castShadow /> */}
-
-            {/* spotlights */}
-
         </>
     );
 };
 
-export default Main3Dmodal;
+export default WallModal;
