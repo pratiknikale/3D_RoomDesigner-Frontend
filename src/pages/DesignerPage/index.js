@@ -9,9 +9,9 @@ import { Suspense } from "react";
 import { setLoggedUser } from "../../reduxStore/user/userSlice";
 import { setCurrentProjectDetails } from "../../reduxStore/projects/projectSlice";
 import { getSelectedProjDetails } from "../../api/projectApi";
-import Main3Dmodal from "./Main3Dmodal";
-import Flooring from "./elementPanelsComponents/Flooring";
-import Walls from "./elementPanelsComponents/Walls";
+import ThreeDViewport from "./threeDViewport";
+import Flooring from "./controlPanel/Flooring";
+import Walls from "./controlPanel/Walls";
 
 const DesignerPage = () => {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const DesignerPage = () => {
         }} xs={8.3}>
           <Canvas shadows>
             <Suspense fallback={null}>
-              <Main3Dmodal />
+              <ThreeDViewport />
             </Suspense>
           </Canvas>
         </Grid>
