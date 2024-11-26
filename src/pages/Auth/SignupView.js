@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ClipLoader } from "react-spinners";
 
-import { signinFieldHandler, submitSignup } from "../../handlers/authHandlers";
+import { signinFieldHandler, submitSignup } from "./handlers/authHandlers";
 
 const signupFormFields = {
     FirstName: "",

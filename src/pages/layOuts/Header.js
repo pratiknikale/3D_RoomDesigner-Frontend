@@ -11,7 +11,7 @@ import Menu from "@mui/material/Menu";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { logout } from "../../handlers/authHandlers";
+import { logout } from "../Auth/handlers/authHandlers";
 
 
 export default function Header() {
