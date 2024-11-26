@@ -1,6 +1,6 @@
-import { signup, login, logOut } from "../api/api";
-import { logoutUser, setLoggedUser } from "../reduxStore/user/userSlice";
-import { setProjectList } from "../reduxStore/projects/projectSlice";
+import { signup, login, logOut } from "../../../api/api";
+import { logoutUser, setLoggedUser } from "../../../reduxStore/user/userSlice";
+import { setProjectList } from "../../../reduxStore/projects/projectSlice";
 
 const signinFieldHandler = (e, signupData, setSignupData) => {
   e.preventDefault();
